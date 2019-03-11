@@ -1,4 +1,4 @@
-package de.adessomobile.postbookchallenge.data.local
+package de.adessomobile.postbookchallenge.data.persistence
 
 /**
  * Interface to save the favored posts.
