@@ -1,4 +1,4 @@
-package de.adessomobile.postbookchallenge.client.models
+package de.adessomobile.postbookchallenge.data.client.models
 
 /**
  * DTO for a comment delivered by the backend.

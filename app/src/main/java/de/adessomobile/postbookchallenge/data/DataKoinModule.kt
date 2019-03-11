@@ -1,15 +1,15 @@
-package de.adessomobile.postbookchallenge.client
+package de.adessomobile.postbookchallenge.data
 
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import de.adessomobile.postbookchallenge.R
-import de.adessomobile.postbookchallenge.client.api.PostsApi
+import de.adessomobile.postbookchallenge.data.client.PostsApi
 import okhttp3.OkHttpClient
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val clientKoinModule = module {
+val dataKoinModule = module {
 
     single { get<Retrofit>().create(PostsApi::class.java) }
 

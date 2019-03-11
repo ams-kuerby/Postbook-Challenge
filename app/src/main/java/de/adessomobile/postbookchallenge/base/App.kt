@@ -1,7 +1,7 @@
 package de.adessomobile.postbookchallenge.base
 
 import android.app.Application
-import de.adessomobile.postbookchallenge.client.clientKoinModule
+import de.adessomobile.postbookchallenge.data.dataKoinModule
 import org.koin.android.ext.android.startKoin
 
 class App : Application() {
@@ -15,7 +15,7 @@ class App : Application() {
     private fun initKoin() {
         startKoin(
             this, listOf(
-                clientKoinModule
+                dataKoinModule
             )
         )
     }

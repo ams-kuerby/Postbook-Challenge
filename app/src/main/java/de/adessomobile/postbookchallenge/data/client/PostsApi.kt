@@ -1,7 +1,7 @@
-package de.adessomobile.postbookchallenge.client.api
+package de.adessomobile.postbookchallenge.data.client
 
-import de.adessomobile.postbookchallenge.client.models.CommentDto
-import de.adessomobile.postbookchallenge.client.models.PostDto
+import de.adessomobile.postbookchallenge.data.client.models.CommentDto
+import de.adessomobile.postbookchallenge.data.client.models.PostDto
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query

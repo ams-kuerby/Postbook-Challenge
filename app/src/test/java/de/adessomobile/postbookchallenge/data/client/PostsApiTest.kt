@@ -1,8 +1,8 @@
-package de.adessomobile.postbookchallenge.client.api
+package de.adessomobile.postbookchallenge.data.client
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import de.adessomobile.postbookchallenge.client.models.CommentDto
-import de.adessomobile.postbookchallenge.client.models.PostDto
+import de.adessomobile.postbookchallenge.data.client.models.CommentDto
+import de.adessomobile.postbookchallenge.data.client.models.PostDto
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
