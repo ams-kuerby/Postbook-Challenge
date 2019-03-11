@@ -1,0 +1,29 @@
+# ########
+# GRADLE #
+# ########
+.gradle
+/local.properties
+build
+
+# ###############
+# IntelliJ IDEA #
+# ###############
+.idea
+*.iml
+gen-external-apklibs
+
+# ###############
+# Android Tools #
+# ###############
+**/project.properties
+*.sqlite
+.DS_Store
+/device-*.png
+
+# #######
+# Other #
+# #######
+/captures
+.externalNativeBuild
+build-assets
+BUILD_NUMBER.txt
