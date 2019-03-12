@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import de.adessomobile.postbookchallenge.R
 import de.adessomobile.postbookchallenge.databinding.ActivityLoginBinding
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 /**
@@ -14,7 +14,7 @@ import timber.log.Timber
  */
 class LoginActivity : AppCompatActivity() {
 
-    private val viewModel: LoginViewModel by inject()
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
