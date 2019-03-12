@@ -16,6 +16,8 @@ class LoginViewModel(
     val events = SingleLiveEvent<LoginEvent>()
 
     fun loginClicked() {
-        events.value = LoginEvent.ShowUserPosts(userId.toInt())
+        if (userId.isNotBlank()) {
+            events.value = LoginEvent.ShowUserPosts(userId.toInt())
+        }
     }
 }
