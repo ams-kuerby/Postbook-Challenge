@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Postbook Challenge</string>
+    <string name="login_userIdHint">UserId</string>
+    <string name="login_loginButton">Login</string>
 </resources>
