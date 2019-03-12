@@ -1,9 +1,9 @@
 package de.adessomobile.postbookchallenge.repository
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import de.adessomobile.postbookchallenge.data.client.PostsApi
 import de.adessomobile.postbookchallenge.data.client.models.CommentDto
 import de.adessomobile.postbookchallenge.data.client.models.PostDto
