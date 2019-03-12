@@ -10,4 +10,6 @@ class LoginViewModel(
     coroutineContextProvider: CoroutineContextProvider
 ) : BaseViewModel(coroutineContextProvider) {
 
+    var userId: String = ""
+
 }
