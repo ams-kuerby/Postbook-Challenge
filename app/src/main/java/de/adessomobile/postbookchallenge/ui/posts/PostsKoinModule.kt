@@ -6,4 +6,6 @@ import org.koin.dsl.module.module
 val postsKoinModule = module {
 
     viewModel { PostsViewModel(get()) }
+
+    single { PostsInteractorImpl(get()) as PostsInteractor }
 }
