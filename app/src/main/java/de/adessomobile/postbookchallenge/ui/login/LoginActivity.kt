@@ -6,8 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import de.adessomobile.postbookchallenge.R
 import de.adessomobile.postbookchallenge.databinding.ActivityLoginBinding
+import de.adessomobile.postbookchallenge.ui.posts.PostsActivity
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 /**
  * Activity to login with a userId.
@@ -30,8 +30,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleEvents(loginEvent: LoginEvent) {
         when (loginEvent) {
-            // TODO Start PostsActivity
-            is LoginEvent.ShowUserPosts -> Timber.w("start Posts ${loginEvent.userId}")
+            is LoginEvent.ShowUserPosts ->
+                startActivity(PostsActivity.createIntent(this, loginEvent.userId))
         }
     }
 }
