@@ -1,6 +1,7 @@
 package de.adessomobile.postbookchallenge.ui.posts
 
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import de.adessomobile.postbookchallenge.repository.PostsRepository
 import de.adessomobile.postbookchallenge.repository.models.PostDomainModel
@@ -27,5 +28,14 @@ class PostsInteractorImplTest {
         val actual = underTest.getPosts(userId)
 
         actual shouldEqual expected
+    }
+
+    @Test
+    fun `Given a post, when updatePost, the post should be updated in the repository`() = runBlocking {
+        val post = PostDomainModel(2, 3, "title 3", "body 3", false)
+
+        underTest.updatePost(post)
+
+        verify(postsRepositoryMock).updatePost(post)
     }
 }
