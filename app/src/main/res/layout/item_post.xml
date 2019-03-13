@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="de.adessomobile.postbookchallenge.ui.models.PostPresentationModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/standard_margin_half"
+        android:layout_marginTop="@dimen/standard_margin_half">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/post_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin_2x"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginBottom="@dimen/standard_margin"
+                android:text="@{item.title}"
+                app:layout_constraintEnd_toStartOf="@id/post_cb_favorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/post_cb_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="@{item.favored}"
+                android:drawableStart="@drawable/favorite_selector"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="post_tv_title,post_cb_favorite" />
+
+            <TextView
+                android:id="@+id/post_tv_body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin_2x"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin_2x"
+                android:layout_marginBottom="@dimen/standard_margin"
+                android:text="@{item.body}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
