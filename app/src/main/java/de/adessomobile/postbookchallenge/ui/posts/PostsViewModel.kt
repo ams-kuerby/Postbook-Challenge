@@ -7,6 +7,7 @@ import de.adessomobile.postbookchallenge.base.coroutines.CoroutineContextProvide
 import de.adessomobile.postbookchallenge.ui.models.PostPresentationModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 /**
  * Architecture Component ViewModel for the PostsActivity
@@ -16,10 +17,19 @@ class PostsViewModel(
     coroutineContextProvider: CoroutineContextProvider
 ) : BaseViewModel(coroutineContextProvider) {
 
+    /**
+     * All available posts for the user.
+     */
     private val allPosts = MutableLiveData<List<PostPresentationModel>>()
 
+    /**
+     * The state whether all posts or only the favored posts should be shown.
+     */
     private val showOnlyFavoredPosts = MutableLiveData<Boolean>()
 
+    /**
+     * The posts filtered according to the state of showOnlyFavoredPosts
+     */
     val posts = MediatorLiveData<List<PostPresentationModel>>()
         .apply {
             addSource(allPosts) {
@@ -30,6 +40,9 @@ class PostsViewModel(
             }
         }
 
+    /**
+     * Load the posts of the user with the given [userId].
+     */
     fun loadPosts(userId: Int) {
         launch {
             allPosts.value = withContext(coroutineContextProvider.io) {
@@ -44,6 +57,24 @@ class PostsViewModel(
                     }
             }
         }
+    }
+
+    /**
+     * Handle a click on the post with the given [postId]
+     */
+    fun onPostClick(postId: Int) {
+        // TODO implement onPostClick
+        Timber.d("post $postId clicked")
+    }
+
+    /**
+     * Handle a click on the favorite button of the post with the given [postId].
+     *
+     * @param favored the new favorite state.
+     */
+    fun onPostFavoriteClick(postId: Int, favored: Boolean) {
+        // TODO implement onPostFavoriteClick
+        Timber.d("post favored $postId: $favored")
     }
 
     private fun filterPosts(): List<PostPresentationModel> {

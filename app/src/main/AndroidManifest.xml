@@ -27,7 +27,8 @@
 
         <activity
             android:name=".ui.posts.PostsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/posts_title" />
     </application>
 
 </manifest>
