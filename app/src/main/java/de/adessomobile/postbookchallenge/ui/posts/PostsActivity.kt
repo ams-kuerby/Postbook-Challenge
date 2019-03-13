@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import de.adessomobile.postbookchallenge.R
 import de.adessomobile.postbookchallenge.databinding.ActivityPostsBinding
+import de.adessomobile.postbookchallenge.ui.postcomments.PostCommentsActivity
 import kotlinx.android.synthetic.main.activity_posts.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -31,6 +32,8 @@ class PostsActivity : AppCompatActivity() {
 
         initRecyclerView()
 
+        viewModel.events.observe(this, Observer(this::handleEvents))
+
         val userId = intent.extras?.getInt(EXTRA_USER_ID) ?: 0
         viewModel.loadPosts(userId)
     }
@@ -42,6 +45,13 @@ class PostsActivity : AppCompatActivity() {
         viewModel.posts.observe(this, Observer {
             postsAdapter.submitList(it)
         })
+    }
+
+    private fun handleEvents(postsEvent: PostsEvent) {
+        when (postsEvent) {
+            is PostsEvent.ShowPostComments ->
+                startActivity(PostCommentsActivity.createIntent(this, postsEvent.postId))
+        }
     }
 
     companion object {

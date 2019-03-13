@@ -4,6 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import de.adessomobile.postbookchallenge.base.BaseViewModel
 import de.adessomobile.postbookchallenge.base.coroutines.CoroutineContextProvider
+import de.adessomobile.postbookchallenge.base.livedata.SingleLiveEvent
 import de.adessomobile.postbookchallenge.ui.models.PostPresentationModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,6 +42,11 @@ class PostsViewModel(
         }
 
     /**
+     * [SingleLiveEvent] used to post [PostsEvent]s to an interested observer.
+     */
+    val events = SingleLiveEvent<PostsEvent>()
+
+    /**
      * Load the posts of the user with the given [userId].
      */
     fun loadPosts(userId: Int) {
@@ -63,8 +69,7 @@ class PostsViewModel(
      * Handle a click on the post with the given [postId]
      */
     fun onPostClick(postId: Int) {
-        // TODO implement onPostClick
-        Timber.d("post $postId clicked")
+        events.value = PostsEvent.ShowPostComments(postId)
     }
 
     /**
