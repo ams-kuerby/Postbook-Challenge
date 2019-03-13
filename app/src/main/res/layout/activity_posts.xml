@@ -36,12 +36,40 @@
                 android:id="@+id/posts_rv_posts"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/posts_rg_filterGroup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/item_post" />
+
+            <RadioGroup
+                android:id="@+id/posts_rg_filterGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <RadioButton
+                    android:id="@+id/posts_rb_filterAll"
+                    style="@style/FilterSelection"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:checked="@{!viewModel.showOnlyFavoredPosts}"
+                    android:text="@string/posts_filterAll" />
+
+                <RadioButton
+                    android:id="@+id/posts_rb_filterFav"
+                    style="@style/FilterSelection"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:checked="@={viewModel.showOnlyFavoredPosts}"
+                    android:text="@string/posts_filterFav" />
+            </RadioGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

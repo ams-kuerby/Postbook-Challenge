@@ -26,7 +26,7 @@ class PostsViewModel(
     /**
      * The state whether all posts or only the favored posts should be shown.
      */
-    private val showOnlyFavoredPosts = MutableLiveData<Boolean>()
+    val showOnlyFavoredPosts = MutableLiveData<Boolean>()
 
     /**
      * The posts filtered according to the state of showOnlyFavoredPosts

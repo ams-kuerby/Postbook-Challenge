@@ -4,4 +4,6 @@
     <string name="login_loginButton">Login</string>
     <string name="posts_title">My Posts</string>
     <string name="postComments_title">Comments</string>
+    <string name="posts_filterAll">all</string>
+    <string name="posts_filterFav">fav</string>
 </resources>
