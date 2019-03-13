@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import de.adessomobile.postbookchallenge.base.BaseViewModel
 import de.adessomobile.postbookchallenge.base.coroutines.CoroutineContextProvider
 import de.adessomobile.postbookchallenge.base.livedata.SingleLiveEvent
+import de.adessomobile.postbookchallenge.base.livedata.refresh
+import de.adessomobile.postbookchallenge.repository.models.PostDomainModel
 import de.adessomobile.postbookchallenge.ui.models.PostPresentationModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 /**
  * Architecture Component ViewModel for the PostsActivity
@@ -17,6 +18,8 @@ class PostsViewModel(
     private val postsInteractor: PostsInteractor,
     coroutineContextProvider: CoroutineContextProvider
 ) : BaseViewModel(coroutineContextProvider) {
+
+    private var userId: Int? = null
 
     /**
      * All available posts for the user.
@@ -50,6 +53,7 @@ class PostsViewModel(
      * Load the posts of the user with the given [userId].
      */
     fun loadPosts(userId: Int) {
+        this.userId = userId
         launch {
             allPosts.value = withContext(coroutineContextProvider.io) {
                 postsInteractor.getPosts(userId)
@@ -78,8 +82,19 @@ class PostsViewModel(
      * @param favored the new favorite state.
      */
     fun onPostFavoriteClick(postId: Int, favored: Boolean) {
-        // TODO implement onPostFavoriteClick
-        Timber.d("post favored $postId: $favored")
+        launch {
+            withContext(coroutineContextProvider.io) {
+                userId?.let { userId ->
+                    allPosts.value?.find { it.id == postId }?.let {
+                        if (favored != it.favored) {
+                            it.favored = favored
+                            postsInteractor.updatePost(PostDomainModel(userId, it.id, it.title, it.body, favored))
+                        }
+                    }
+                }
+            }
+            allPosts.refresh()
+        }
     }
 
     private fun filterPosts(): List<PostPresentationModel> {

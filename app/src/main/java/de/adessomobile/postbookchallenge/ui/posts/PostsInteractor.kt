@@ -11,4 +11,9 @@ interface PostsInteractor {
      * Get a list of all posts of the user with the given [userId].
      */
     suspend fun getPosts(userId: Int): List<PostDomainModel>
+
+    /**
+     * Update the given [post].
+     */
+    suspend fun updatePost(post: PostDomainModel)
 }
