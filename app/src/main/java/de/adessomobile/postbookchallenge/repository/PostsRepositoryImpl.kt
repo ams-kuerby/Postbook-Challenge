@@ -23,6 +23,16 @@ class PostsRepositoryImpl(
             }
     }
 
+    override suspend fun getPost(postId: Int): PostDomainModel {
+        val favoredPostIds = favoredPostPersistence.getFavoredPostIds()
+        return postsApi.getPost(postId)
+            .await()
+            .let {
+                val favored = favoredPostIds.contains(it.id)
+                PostDomainModel(it.userId, it.id, it.title, it.body, favored)
+            }
+    }
+
     override suspend fun updatePost(post: PostDomainModel) {
         if (post.favored) {
             favoredPostPersistence.favor(post.id)

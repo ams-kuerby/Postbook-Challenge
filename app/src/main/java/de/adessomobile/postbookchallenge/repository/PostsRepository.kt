@@ -14,6 +14,11 @@ interface PostsRepository {
     suspend fun listPosts(userId: Int): List<PostDomainModel>
 
     /**
+     * Get the post with the given [postId]
+     */
+    suspend fun getPost(postId: Int): PostDomainModel
+
+    /**
      * Update the given [post].
      */
     suspend fun updatePost(post: PostDomainModel)

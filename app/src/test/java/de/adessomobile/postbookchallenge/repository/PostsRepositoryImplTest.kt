@@ -93,6 +93,35 @@ class PostsRepositoryImplTest {
         }
 
     @Test
+    fun `Given an unfavored post, when getPost, then the unfavored post should be converted and returned`() =
+        runBlocking<Unit> {
+            val postId = 3
+            val postDto = PostDto(2, 3, "title 3", "body 3")
+
+            whenever(postsApi.getPost(postId)).thenReturn(async { postDto })
+            whenever(favoredPostPersistence.getFavoredPostIds()).thenReturn(setOf(2, 4))
+
+            val actual = underTest.getPost(postId)
+
+            val expected = PostDomainModel(2, 3, "title 3", "body 3", false)
+            actual shouldEqual expected
+        }
+
+    @Test
+    fun `Given a favored posts, when getPost, then the favored posts should be converted and returned`() =
+        runBlocking<Unit> {
+            val postId = 4
+            val postDto = PostDto(2, 4, "title 4", "body 4")
+            whenever(postsApi.getPost(postId)).thenReturn(async { postDto })
+            whenever(favoredPostPersistence.getFavoredPostIds()).thenReturn(setOf(2, 4))
+
+            val actual = underTest.getPost(postId)
+
+            val expected = PostDomainModel(2, 4, "title 4", "body 4", true)
+            actual shouldEqual expected
+        }
+
+    @Test
     fun `Given a favored post, when updatePost, then post should be favored`() = runBlocking {
         val postId = 2
         val post = PostDomainModel(1, postId, "post title", "post body", true)
