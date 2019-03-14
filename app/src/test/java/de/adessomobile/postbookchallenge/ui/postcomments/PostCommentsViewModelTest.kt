@@ -77,7 +77,7 @@ class PostCommentsViewModelTest {
         underTest.loadData(postId)
 
         // WHEN
-        underTest.onPostFavoriteClick(true)
+        underTest.onPostFavoriteClick(postId, true)
 
         // THEN
         val expected = PostDomainModel(userId, 3, "post title 3", "post body 3", true)
@@ -108,7 +108,7 @@ class PostCommentsViewModelTest {
         underTest.items.observeForever(Observer(observerMock))
 
         // WHEN
-        underTest.onPostFavoriteClick(true)
+        underTest.onPostFavoriteClick(postId, true)
 
         val expected = listOf(
             PostCommentsPresentationModel.PostPresentationModel(userId, postId, "post title 3", "post body 3", true),
@@ -137,7 +137,7 @@ class PostCommentsViewModelTest {
         underTest.loadData(postId)
 
         // WHEN
-        underTest.onPostFavoriteClick(false)
+        underTest.onPostFavoriteClick(postId, false)
 
         // THEN
         runBlocking { verify(postCommentsInteractorMock, never()).updatePost(any()) }
@@ -166,7 +166,65 @@ class PostCommentsViewModelTest {
         underTest.loadData(postId)
 
         // WHEN
-        underTest.onPostFavoriteClick(false)
+        underTest.onPostFavoriteClick(postId, false)
+
+        val expected = listOf(
+            PostCommentsPresentationModel.PostPresentationModel(userId, postId, "post title 3", "post body 3", false),
+            PostCommentsPresentationModel.CommentPresentationModel(4, "name 4", "email 4", "body 4"),
+            PostCommentsPresentationModel.CommentPresentationModel(5, "name 5", "email 5", "body 5"),
+            PostCommentsPresentationModel.CommentPresentationModel(6, "name 6", "email 6", "body 6")
+        )
+        verify(observerMock, atLeastOnce()).invoke(expected)
+    }
+
+    @Test
+    fun `Given a different postId, when onPostFavoriteClick, then don't update in Interactor`() {
+        // GIVEN
+        val userId = 330
+        val postId = 3
+        val postDomainModel = PostDomainModel(userId, postId, "post title 3", "post body 3", false)
+        val commentDomainModels = listOf(
+            CommentDomainModel(postId, 4, "name 4", "email 4", "body 4"),
+            CommentDomainModel(postId, 5, "name 5", "email 5", "body 5"),
+            CommentDomainModel(postId, 6, "name 6", "email 6", "body 6")
+        )
+        runBlocking {
+            whenever(postCommentsInteractorMock.getPost(postId)).thenReturn(postDomainModel)
+            whenever(postCommentsInteractorMock.getComments(postId)).thenReturn(commentDomainModels)
+        }
+        underTest.loadData(postId)
+
+        // WHEN
+        underTest.onPostFavoriteClick(100, true)
+
+        // THEN
+        runBlocking { verify(postCommentsInteractorMock, never()).updatePost(any()) }
+    }
+
+    @Test
+    fun `Given a different postId, when onPostFavoriteClick, then update LiveData`() {
+        // GIVEN
+        val observerMock: (List<PostCommentsPresentationModel>) -> Unit = mock {
+            onGeneric { invoke(any()) } doReturn Unit
+        }
+        underTest.items.observeForever(Observer(observerMock))
+
+        val userId = 330
+        val postId = 3
+        val postDomainModel = PostDomainModel(userId, postId, "post title 3", "post body 3", false)
+        val commentDomainModels = listOf(
+            CommentDomainModel(postId, 4, "name 4", "email 4", "body 4"),
+            CommentDomainModel(postId, 5, "name 5", "email 5", "body 5"),
+            CommentDomainModel(postId, 6, "name 6", "email 6", "body 6")
+        )
+        runBlocking {
+            whenever(postCommentsInteractorMock.getPost(postId)).thenReturn(postDomainModel)
+            whenever(postCommentsInteractorMock.getComments(postId)).thenReturn(commentDomainModels)
+        }
+        underTest.loadData(postId)
+
+        // WHEN
+        underTest.onPostFavoriteClick(100, true)
 
         val expected = listOf(
             PostCommentsPresentationModel.PostPresentationModel(userId, postId, "post title 3", "post body 3", false),

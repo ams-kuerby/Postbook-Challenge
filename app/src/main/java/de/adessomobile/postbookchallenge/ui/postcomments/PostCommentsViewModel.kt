@@ -86,11 +86,11 @@ class PostCommentsViewModel(
      *
      * @param favored the new favorite state.
      */
-    fun onPostFavoriteClick(favored: Boolean) {
+    fun onPostFavoriteClick(postId: Int, favored: Boolean) {
         launch {
             withContext(coroutineContextProvider.io) {
                 post.value?.let {
-                    if (favored != it.favored) {
+                    if (favored != it.favored && postId == it.id) {
                         it.favored = favored
                         postCommentsInteractor.updatePost(
                             PostDomainModel(it.userId, it.id, it.title, it.body, favored)
