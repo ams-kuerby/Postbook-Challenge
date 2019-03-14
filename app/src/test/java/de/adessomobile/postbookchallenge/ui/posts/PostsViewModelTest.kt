@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.*
 import de.adessomobile.postbookchallenge.base.coroutines.MockCoroutineContextProvider
 import de.adessomobile.postbookchallenge.repository.models.PostDomainModel
-import de.adessomobile.postbookchallenge.ui.models.PostPresentationModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldEqual

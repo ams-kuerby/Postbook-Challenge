@@ -7,7 +7,6 @@ import de.adessomobile.postbookchallenge.base.coroutines.CoroutineContextProvide
 import de.adessomobile.postbookchallenge.base.livedata.SingleLiveEvent
 import de.adessomobile.postbookchallenge.base.livedata.refresh
 import de.adessomobile.postbookchallenge.repository.models.PostDomainModel
-import de.adessomobile.postbookchallenge.ui.models.PostPresentationModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 

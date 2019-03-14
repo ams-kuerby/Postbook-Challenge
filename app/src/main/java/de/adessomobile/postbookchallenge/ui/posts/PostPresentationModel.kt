@@ -1,4 +1,4 @@
-package de.adessomobile.postbookchallenge.ui.models
+package de.adessomobile.postbookchallenge.ui.posts
 
 data class PostPresentationModel(
     val id: Int,

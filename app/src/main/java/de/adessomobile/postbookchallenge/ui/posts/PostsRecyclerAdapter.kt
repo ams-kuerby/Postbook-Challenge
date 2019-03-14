@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.adessomobile.postbookchallenge.R
 import de.adessomobile.postbookchallenge.databinding.ItemPostBinding
-import de.adessomobile.postbookchallenge.ui.models.PostPresentationModel
 
 /**
  * RecyclerAdapter to display the posts in the PostsActivity
