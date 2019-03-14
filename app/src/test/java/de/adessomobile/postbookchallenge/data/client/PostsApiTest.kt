@@ -61,6 +61,28 @@ class PostsApiTest {
     }
 
     @Test
+    fun `Given postId 2, when getPost, then the endpoint posts with postId 2 is called`() {
+        server.enqueue(MockResponse().setBody(bodySinglePost))
+
+        val postId = 2
+        runBlocking { underTest.getPost(postId).await() }
+
+        val request = server.takeRequest()
+
+        request.path shouldEqual "/posts/$postId"
+    }
+
+    @Test
+    fun `Given a post json, when getPost, then correct dto is returned`() {
+        server.enqueue(MockResponse().setBody(bodySinglePost))
+
+        val posts = runBlocking { underTest.getPost(2).await() }
+
+        val expected = PostDto(1, 2, "post title 2", "post 2")
+        posts shouldEqual expected
+    }
+
+    @Test
     fun `Given postId 1, when listComments, then the endpoint comments with postId 1 is called`() {
         server.enqueue(MockResponse().setBody(bodyComments))
 
@@ -103,6 +125,13 @@ private val bodyPosts = """[
   }
 ]
 """
+
+private val bodySinglePost = """{
+  "userId": 1,
+  "id": 2,
+  "title": "post title 2",
+  "body": "post 2"
+}"""
 
 private val bodyComments = """[
   {
