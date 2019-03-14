@@ -24,6 +24,10 @@ class PostCommentsActivity : AppCompatActivity() {
         setSupportActionBar(postComments_tb_toolbar)
 
         initRecyclerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         val postId = intent.extras?.getInt(PostCommentsActivity.EXTRA_POSTS_ID) ?: 0
         viewModel.loadData(postId)

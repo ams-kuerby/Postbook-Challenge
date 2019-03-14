@@ -33,6 +33,10 @@ class PostsActivity : AppCompatActivity() {
         initRecyclerView()
 
         viewModel.events.observe(this, Observer(this::handleEvents))
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         val userId = intent.extras?.getInt(EXTRA_USER_ID) ?: 0
         viewModel.loadPosts(userId)
