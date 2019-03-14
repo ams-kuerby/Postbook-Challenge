@@ -3,4 +3,5 @@
     <dimen name="standard_margin_half">4dp</dimen>
     <dimen name="standard_margin_2x">16dp</dimen>
     <dimen name="standard_margin_3x">24dp</dimen>
+    <dimen name="standard_margin_4x">32dp</dimen>
 </resources>

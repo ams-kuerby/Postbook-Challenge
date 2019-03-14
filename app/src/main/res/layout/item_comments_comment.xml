@@ -14,7 +14,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/standard_margin_3x"
+        android:layout_marginStart="@dimen/standard_margin_4x"
         android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginBottom="@dimen/standard_margin_half"
         android:layout_marginTop="@dimen/standard_margin_half">
